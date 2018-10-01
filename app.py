@@ -8,6 +8,11 @@ def return_homepage():
     return render_template('homepage.html')
 
 
+@app.route('/charts')
+def return_charts():
+    return render_template('charts.html')
+
+
 @app.route('/loan_history')
 def return_loan_history():
     return render_template('loan_history.html')
