@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="card text-center">
+    <img class="card-img-top" src="{{url_for('static', filename='financialplanning.jpg')}}" alt="Card image cap">
+    <div class="card-body bg-light">
+        <h5 class="card-title">Apply today for a new personal loan from ATX Financial!</h5>
+        <p class="card-text">With over a really long time of experience in the banking industry, ATX financial is
+            proud to offer our brand new lending program to new customers. With three different loan categories, anyone
+            can take home personalized loan today.</p>
+        <a href="/loan_application" class="btn btn-success">Start your application</a>
+    </div>
+</div>
+<br>
+<div class="card-deck">
+    <div class="card">
+        <div class="card-header text-white bg-dark"><b>Platinum Loan</b></div>
+        <div class="card-body bg-light">
+            <h5 class="card-title">Premium Offer</h5>
+            <p class="card-text">This is our lowest interest rate that we offer. Be rewarded for your high credit
+                score.</p>
+            <p class="card-text"><small class="text-muted">Offer subject to application
+                    approval.</small></p>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header bg-warning"><b>Gold Loan</b></div>
+        <div class="card-body bg-light">
+            <h5 class="card-title">Best in Class Value</h5>
+            <p class="card-text">Get the best of both worlds with a competitive rate offer via our Gold Loan.</p>
+            <p class="card-text"><small class="text-muted">Offer subject to application
+                    approval.</small></p>
+        </div>
+    </div>
+    <div class="card bg-light">
+        <div class="card-header"><b>Basic Loan</b></div>
+        <div class="card-body">
+            <h5 class="card-title">Ball on a Budget</h5>
+            <p class="card-text">Qualifying applicants will be locked into a high interest loan for a period of 48
+                months. Collateral is required.</p>
+            <p class="card-text"><small class="text-muted">Offer subject to application
+                    approval.</small></p>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
