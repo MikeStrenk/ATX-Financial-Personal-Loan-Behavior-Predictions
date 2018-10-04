@@ -2,6 +2,20 @@
 
 {% block content %}
 
-<h1>Placeholder</h1>
+<h3>Application</h3>
+
+
+<form action="{{ url_for('application_complete') }}" method="post">
+    <p>First Name
+        <input type="text" name="firstName">
+    </p>
+    <p>Last Name
+        <input type="text" name="lastName">
+    </p>
+    <p>
+        <input type="submit">
+    </p>
+</form>
+
 
 {% endblock %}
