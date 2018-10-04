@@ -1,0 +1,16 @@
+when we say default below anywhere - it means late,default,grace, charged off categories- anything thats not current or fully paid
+
+addr_state - distribution by state - which state has most and least borrowers in 2017
+application_type - how many loans in each category ind/joint?
+dti - how does the ratio look for loans which defaulted/charged off/late (not current and fully paid) and  for those loans which are current/fullypaid?
+does emp_title show any relation to which profession is taking more loans?
+annual_inc to job_title - does it show which job pays most?and least?
+if emp_length is more do they have more current loans or more defaults/late/etc?
+does home ownership relate to loan status in anyway?
+how many loans were put in payment plans after defaulting?
+earliest_cr_line - use this column to calculate the length of their credit history and see if people with longer credit history have better loan status or what proportion defaulted depending on the credit history
+group all the loans based on the 'grade' column and see how the counts look like
+in defaulted loans, what was the primary 'hardship_reason' provided?
+from the defaulted loans how many were settled . use debt_settlement_flag
+when a loan is settled how much loan is recovered usually? use settlement_percentage
+does having a bankruptcy show a direct relation to their loan status? any relation that can be found. use pub_rec_bankruptcies
