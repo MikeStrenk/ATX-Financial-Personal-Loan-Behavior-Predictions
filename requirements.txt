@@ -91,7 +91,6 @@ numexpr==2.6.4
 numpy==1.14.2
 numpydoc==0.7.0
 oauthlib==2.1.0
-odo==0.5.1
 olefile==0.44
 openpyxl==2.4.8
 openweathermapy==0.6.6
