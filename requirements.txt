@@ -26,7 +26,6 @@ cryptography==2.1.4
 cycler==0.10.0
 cytoolz==0.8.2
 dask==0.15.3
-datashape==0.5.4
 decorator==4.1.2
 distributed==1.19.1
 dnspython==1.15.0
