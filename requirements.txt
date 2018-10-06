@@ -18,7 +18,7 @@ PyMySQL==0.8.1
 python-dateutil==2.7.3
 pytz==2018.4
 six==1.11.0
-sklearn==0.19.1
+sklearn==0.19
 SQLAlchemy==1.2.7
 tzlocal==1.5.1
 Werkzeug==0.14.1
