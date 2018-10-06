@@ -1,11 +1,18 @@
 from flask import Flask, render_template, flash, redirect, request, url_for
 from sklearn.externals import joblib
+import datetime
+import psycopg2
+
 from config import Config
 
 app = Flask(__name__)
 app.config.from_object(Config)
 
-from forms import ApplicationForm
+from forms import ApplicationForm, DeleteRowForm
+
+conn = psycopg2.connect(
+    '''host=ec2-54-225-241-25.compute-1.amazonaws.com dbname=d4mmfd28jhu33d user=pkvdgzetxertgh password=8ea6dd1dda6f7b947adf2a378d2494bed62cd58e7b3bf14baa55a16117a2ce90''')
+cur = conn.cursor()
 
 
 tfidf_model = None
@@ -13,7 +20,7 @@ tfidf_model = None
 
 def load_tfidf_model():
     global tfidf_model
-    tfidf_model = joblib.load('data/model3.pkl')
+    tfidf_model = joblib.load('data/finalized_model.sav')
 
 
 def convert_to_binary(x):
@@ -27,12 +34,12 @@ def convert_to_binary(x):
 
 def convert_credit_grade(grade):
     grade_dict = {
-        '>750': 1,
-        '>700': 2,
-        '>650': 3,
-        '>625': 4,
-        '>600': 5,
-        '>550': 6,
+        '750': 1,
+        '700': 2,
+        '650': 3,
+        '625': 4,
+        '600': 5,
+        '550': 6,
         "Bad Credit": 7
     }
     return grade_dict[grade]
@@ -48,9 +55,22 @@ def return_charts():
     return render_template('charts.html')
 
 
-@app.route('/loan_history')
+@app.route('/loan_history', methods=['GET', 'POST'])
 def return_loan_history():
-    return render_template('loan_history.html')
+    # form = DeleteRowForm()
+    # if form.validate_on_submit():
+    #     ID = int(form.ID.data)
+    #     print(ID)
+    #     cur.execute("DELETE FROM loan_history WHERE id={}".format(ID))
+    cur.execute("SELECT * FROM loan_history")
+    data = cur.fetchall()
+    print(type(data))
+    print(data)
+    print(type(data[0]))
+    print(data[0])
+    print(data[0][0])
+
+    return render_template('loan_history.html', data=data)
 
 
 @app.route('/loan_application', methods=['GET', 'POST'])
@@ -61,7 +81,8 @@ def return_loan_application():
         age = form.age.data
         occupation = form.occupation.data
 
-        grade = convert_credit_grade(form.grade.data)
+        credit = form.grade.data
+        grade = convert_credit_grade(credit)
         Years_At_present_Employment = form.Years_At_present_Employment.data
 
         expenses = form.expenses.data
@@ -81,12 +102,26 @@ def return_loan_application():
 
         print('Chance of default: {}'.format(default_chance*100))
 
-        # db logic goes here
-
         if default_chance > .3:
             message = 'However you have been rejected :('
+            approval = 'rejected'
         else:
             message = 'You have been accepted! :)'
+            approval = 'accepted'
+
+        insert_query = "INSERT INTO loan_history VALUES(DEFAULT, {}, '{}', {}, '{}', '{}', '{}', '{}')".format(
+            age,
+            occupation,
+            Years_At_present_Employment,
+            income,
+            Housing,
+            credit,
+            approval)
+
+        # print(insert_query)
+
+        cur.execute(insert_query)
+        conn.commit()
 
         return render_template('application_complete.html', message=message)
 
@@ -99,18 +134,6 @@ def return_application_complete(message):
     return render_template('application_complete.html', message=message)
 
 
-# @app.route('/handle_data', methods=['GET', 'POST'])
-# def handle_data():
-#     form = LoginForm(request.form)
-
-#     if request.method == 'POST' and form.validate():
-#         username = form.username.data
-#         # db_session.add(user)
-#         flash('Thanks for registering')
-#         return redirect(url_for('application_complete.html'))
-#     return render_template('loan_application.html', form=form)
-
-
 if __name__ == '__main__':
 
     try:
@@ -121,4 +144,4 @@ if __name__ == '__main__':
         print("Model loading failed")
         print(str(e))
 
-    app.run(debug=False)
+    app.run(debug=True)

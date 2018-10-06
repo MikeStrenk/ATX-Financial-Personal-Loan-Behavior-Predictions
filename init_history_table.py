@@ -7,29 +7,14 @@ cur = conn.cursor()
 
 cur.execute("""
 CREATE TABLE IF NOT EXISTS loan_history(
-    loan_ID integer PRIMARY KEY,
-    Status_Checking_Acc text,
-    Duration_in_Months integer,
-    Credit_History text,
-    Purposre_Credit_Taken text,
-    Credit_Amount integer,
-    Savings_Acc text,
-    Years_At_Present_Employment text,
-    Inst_Rt_Income integer,
-    Marital_Status_Gender text,
-    Other_Debtors_Guarantors text,
-    Current_Address_Yrs integer,
-    Property text,
-    Age integer,
-    Other_Inst_plans text,
-    Housing text,
-    Num_CC integer,
-    Job text,
-    Dependents integer,
-    Telephone text,
-    Foreign_Worker text,
-    Default_On_Payment integer,
-    Count integer
+    id SERIAL PRIMARY KEY,
+    age INT,
+    occupation VARCHAR(50),
+    years_at_job INT,
+    salary INT,
+    home VARCHAR(20),
+    credit VARCHAR(20),
+    approval VARCHAR(20)
 )
 """)
 

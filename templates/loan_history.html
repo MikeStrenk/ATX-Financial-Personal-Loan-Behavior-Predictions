@@ -2,8 +2,42 @@
 
 {% block content %}
 
-<h1>Placeholder</h1>
+<div class='text-center'>
+    <h3>Applications History</h3>
+</div>
+<br>
 
-
+<div class='text-center'>
+    <table class="table table-hover">
+        <thead class='thead-light text-center'>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Age</th>
+                <th scope="col">Occupation</th>
+                <th scope="col">Years at Current Job</th>
+                <th scope="col">Salary</th>
+                <th scope="col">Housing</th>
+                <th scope="col">Credit Score</th>
+                <th scope="col">Loan Approval</th>
+            </tr>
+        </thead>
+        {%- for row in data %}
+        <tr>
+            <td scope="row">{{ row[0] }}</td>
+            <td class="text-center">{{ row[1] }}</td>
+            <td class="text-center">{{ row[2] }}</td>
+            <td class="text-center">{{ row[3] }}</td>
+            <td class="text-center">{{ row[4] }}</td>
+            <td class="text-center">{{ row[5] }}</td>
+            <td class="text-center">{{ row[6] }}</td>
+            {% if row[7] == 'rejected' %}
+            <td class="table-danger text-center">{{ row[7] }}</td>
+            {% else %}
+            <td class="table-success text-center">{{ row[7] }}</td>
+            {% endif %}
+        </tr>
+        {%- endfor %}
+    </table>
+</div>
 
 {% endblock %}

@@ -3,19 +3,23 @@ from wtforms import TextField, SelectField, IntegerField, Form, BooleanField, St
 from wtforms.validators import DataRequired, AnyOf, NoneOf
 
 
+class DeleteRowForm(FlaskForm):
+    ID = IntegerField('Delete Row: ', validators=[DataRequired()])
+
+
 class ApplicationForm(FlaskForm):
     age = IntegerField("Age: ", validators=[DataRequired()])
     occupation = StringField("Occupation: ", validators=[DataRequired()])
     grade = SelectField("Credit Score: ", choices=[
         ('Choose', 'Choose'),
-        ('>750', '>750'),
-        ('>700', '>700'),
-        ('>650', '>650'),
-        ('>625', '>625'),
-        ('>600', '>600'),
-        ('>550', '>550'),
+        ('750', '750'),
+        ('700', '700'),
+        ('650', '650'),
+        ('625', '625'),
+        ('600', '600'),
+        ('550', '550'),
         ("Bad Credit", "Bad Credit")],
-        validators=[AnyOf(['>750', '>700', '>650', '>625', '>600', '>550', "Bad Credit"])])
+        validators=[AnyOf(['750', '700', '650', '625', '600', '550', "Bad Credit"])])
     Years_At_present_Employment = IntegerField(
         "Years at present employment: ", validators=[DataRequired()])
     expenses = IntegerField(
@@ -37,7 +41,7 @@ class ApplicationForm(FlaskForm):
                  ('Live with Parents',
                   'Live with Parents')],
         validators=[AnyOf([
-            'Own my Home',
+            'Own my home',
             'Mortgage',
             'Rent',
             'Live with Parents'])])
